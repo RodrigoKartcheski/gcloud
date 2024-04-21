@@ -3,20 +3,26 @@
 # https://www.debian.org/releases/bookworm/
 # O Debian "bookworm" 12.5 foi lançado em 10 de Fevereiro de 2024
 
-# baixar o diretorio do repositorio remoto para local
+# baixar o diretorio do repositorio remoto para local: git clone https://github.com/RodrigoKartcheski/gcloud.git
 # em variaveis (ENV) adequar os caminho porpostos para a realidade do local
+# acesse o repositorio clonado
+# ATENÇÃO: para executar o docker build deve-se estar no mesmo diretorio do arquivo Dockerfile - neste exemplo seria o diretorio "gcloud-cli-debian-12"
+# ao acessar o conteiner estaremos no diretorio /app - para retornar a raiz e seguir para o diretorio sincronizado com o host digite <cd /> e observe o caminho definido no volume
+# no volume abaixo o caminho do docker e do host estão definido para < cd /home/jobs/gcloud/gcloud-cli-debian-12/src>
 # sudo chmod 777 -R /home/jobs/gcloud
 # docker volume create gcloudvol
 # docker build -t mgcloud:1.0 .
 # docker run -it -v gcloudvol:/app/src -v /home/jobs/gcloud/gcloud-cli-debian-12/src:/home/jobs/gcloud/gcloud-cli-debian-12/src mgcloud:1.0 bash
+# abaixo comandos opcionais - usar com cuidado
+# cd /home/jobs/gcloud/gcloud-cli-debian-12/src
 # docker run -it mgcloud:1.0 bash | opcional
+# docker rm -f $(docker ps -aq)
+# docker rmi -f $(docker images -q)
+# docker volume prune
 # gcloud version
 # docker volume ls
-# sudo ls /var/lib/docker/volumes
-# docker volume create gcloudvol
-
 # docker volume rm gcloudvol
-
+# sudo ls /var/lib/docker/volumes
 # https://www.youtube.com/watch?v=gU_3fW2VFPc&t=458s
 
 FROM debian:bookworm
@@ -32,7 +38,8 @@ ENV CLOUD_ZONE="us-central1"
 
 # Definir o usuário e o diretório de trabalho padrão no container
 WORKDIR /app
-#USER root
+
+USER root
 
 ####
 # Instalar as dependências necessárias

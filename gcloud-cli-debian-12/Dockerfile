@@ -9,6 +9,7 @@
 # ATENÇÃO: para executar o docker build deve-se estar no mesmo diretorio do arquivo Dockerfile - neste exemplo seria o diretorio "gcloud-cli-debian-12"
 # ao acessar o conteiner estaremos no diretorio /app - para retornar a raiz e seguir para o diretorio sincronizado com o host digite <cd /> e observe o caminho definido no volume
 # no volume abaixo o caminho do docker e do host estão definido para < cd /home/jobs/gcloud/gcloud-cli-debian-12/src>
+# a pasta keys é reservada para colocar a chave json do Google, está vazia por que a chave é de uso confidencial
 # sudo chmod 777 -R /home/jobs/gcloud
 # docker volume create gcloudvol
 # docker build -t mgcloud:1.0 .

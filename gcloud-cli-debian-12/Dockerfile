@@ -7,6 +7,7 @@
 # em variaveis (ENV) adequar os caminho porpostos para a realidade do local
 # acesse o repositorio clonado
 # ATENÇÃO: para executar o docker build deve-se estar no mesmo diretorio do arquivo Dockerfile - neste exemplo seria o diretorio "gcloud-cli-debian-12"
+# Python reconhece python3.9 main.py
 # ao acessar o conteiner estaremos no diretorio /app - para retornar a raiz e seguir para o diretorio sincronizado com o host digite <cd /> e observe o caminho definido no volume
 # no volume abaixo o caminho do docker e do host estão definido para < cd /home/jobs/gcloud/gcloud-cli-debian-12/src>
 # a pasta keys é reservada para colocar a chave json do Google, está vazia por que a chave é de uso confidencial
@@ -45,6 +46,8 @@ USER root
 ####
 # Instalar as dependências necessárias
 RUN apt-get update && apt-get -y install wget build-essential libssl-dev libffi-dev zlib1g-dev
+# Instale o pacote libbz2-dev
+#RUN apt-get update && apt-get install -y libbz2-dev
 
 # Instalar wget para baixar o Python
 RUN apt-get install -y wget
@@ -56,6 +59,9 @@ RUN wget https://www.python.org/ftp/python/3.9.7/Python-3.9.7.tgz \
     && ./configure --enable-optimizations \
     && make -j 8 \
     && make altinstall
+    
+# Instale o pacote libbz2-dev
+RUN apt-get update && apt-get install -y libbz2-dev
 
 # Verificar a versão do Python
 RUN python3.9 --version

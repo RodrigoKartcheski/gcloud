@@ -17,9 +17,11 @@ comandos_iam = [
 ]
 
 
-# exemplo do comando comandos_iam fixo
+
+
+################## exemplo do comando comandos_iam fixo ##################
 """
-#1 gcp_iam_management.py
+#! gcp_iam_management.py
 import subprocess
 
 

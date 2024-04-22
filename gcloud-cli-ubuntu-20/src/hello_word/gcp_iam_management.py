@@ -7,9 +7,9 @@ comandos=comandos_iam
 
 # Executar cada comando
 for comando in comandos:
-    print(f"iniciando execução do comando {comando}!")
+    print(f"\n iniciando execução do comando {comando}!")
     processo = subprocess.Popen(comando, shell=True)
-    print(f"comando {comando} executado com sucesso!")
+    print(f"comando {comando} executado com sucesso! \n")
     processo.wait()  # Aguardar o término do processo
 
 print("Todos os comandos foram executados.")

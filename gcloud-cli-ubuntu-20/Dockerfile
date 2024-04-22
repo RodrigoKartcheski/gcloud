@@ -16,10 +16,13 @@
 # a pasta keys é reservada para colocar a chave json do Google, está vazia por que a chave é de uso confidencial
 # sudo chmod 777 -R /home/jobs/gcloud
 # docker volume create gcloud_ubuvol
+# ir até a pasta do Dockerfile desejada <gcloud-cli-ubuntu-20>
 # docker build -t mgcloud:1.0 .
 # docker run -it -v gcloud_ubuvol:/app/src -v /home/jobs/gcloud/gcloud-cli-ubuntu-20/src:/home/jobs/gcloud/gcloud-cli-ubuntu-20/src mgcloud:1.0 bash
 # abaixo comandos opcionais - usar com cuidado
 # cd /home/jobs/gcloud/gcloud-cli-ubuntu-20/src
+# cole a chave json do serviçe account no diretorio keys
+# No arquivo config.py alterar as condições do projeto
 # gcloud init
 # excute o arquivo <python3 gcp_iam_management.py> ou os arquivos abaixo
 # gcloud projects add-iam-policy-binding learn-dataflow-420912 --member=user:rodrigo.kartcheski@gmail.com --role=roles/iam.serviceAccountUser
@@ -30,9 +33,6 @@
 # opcional: gcloud projects add-iam-policy-binding learn-dataflow-420912 --member=serviceAccount:dataflow-teste@learn-dataflow-420912.iam.gserviceaccount.com --role=roles/storage.admin
 
 
-
-
-# learn-dataflow-420912
 FROM ubuntu:20.04
 
 USER root

@@ -6,7 +6,7 @@ import sys
 
 logging.basicConfig(level=logging.INFO, stream=sys.stdout, format="%(asctime)s - %(levelname)s - %(message)s")
 
-serviceAccount = r'/home/jobs/dataflow/first_hello_word/keys/learn-gcp-cloud-run-328aca6c6796.json'
+serviceAccount = r'/home/jobs/gcloud/gcloud-cli-ubuntu-20/src/keys/learn-gcp-cloud-run-328aca6c6796.json'
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = serviceAccount
 
 

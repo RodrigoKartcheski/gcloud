@@ -3,29 +3,36 @@ import apache_beam as beam
 import os
 import logging
 import sys
+from config import project_id, region, key_service_account, path_full_requirements, bucket_dataflow
 
 logging.basicConfig(level=logging.INFO, stream=sys.stdout, format="%(asctime)s - %(levelname)s - %(message)s")
 
-serviceAccount = r'/home/jobs/gcloud/gcloud-cli-ubuntu-20/src/keys/learn-gcp-cloud-run-328aca6c6796.json'
+serviceAccount=key_service_account #serviceAccount = r'/home/jobs/gcloud/gcloud-cli-ubuntu-20/src/keys/learn-gcp-cloud-run-328aca6c6796.json'
+bucketDataflow=bucket_dataflow
+project=project_id
+region=region
+bucketDataflow=bucket_dataflow
+service_account=service_account
+requirements_file=path_full_requirements
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = serviceAccount
 
 # Parametros da Pipeline Options
 options = PipelineOptions(
         flags=argv,
-        project='learn-gcp-cloud-run',
+        project=project,
         runner='DataflowRunner',
         streaming=False,
         job_name='load-get_hello',
-        temp_location='gs://hello-word-bucket/tmp',
-        staging_locations='gs://hello-word-bucket/stagin',
+        temp_location=f"""'gs://{bucketDataflow}/tmp'""",
+        staging_locations=f"""'gs://{bucketDataflow}/stagin'""",
         autoscaling_algorithm='THROUGHPUT_BASED',
-        num_workers=1,
-        region='us-central1',
+        num_workers=5,
+        region=region,
         #template_location='gs://hello-word-bucket/templates/tplt-hello-word-v2',
         #subnetwork='https://www.googleapis.com/compute/v1/projects/vpc-host-prod-eh839-gx617/regions/us-central1/subnetworks/us-grp-jacto-data-analytics-subnet',
         disk_size_gb=30,
-        service_account_email='dataflow-teste@learn-gcp-cloud-run.iam.gserviceaccount.com',
-        requirements_file='/home/jobs/dataflow/first_hello_word/hello_word/requirements.txt',
+        service_account_email=service_account,
+        requirements_file=requirements_file,
         save_main_session = False
 )
 

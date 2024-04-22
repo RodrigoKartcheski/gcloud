@@ -3,10 +3,15 @@ import apache_beam as beam
 import os
 import logging
 import sys
+from config import project_id, region, service_account, key_service_account, bucket_dataflow
+
 
 logging.basicConfig(level=logging.INFO, stream=sys.stdout, format="%(asctime)s - %(levelname)s - %(message)s")
 
-serviceAccount = r'/home/jobs/gcloud/gcloud-cli-ubuntu-20/src/keys/learn-gcp-cloud-run-328aca6c6796.json'
+project=project_id
+region=region
+serviceAccount=key_service_account #serviceAccount = r'/home/jobs/gcloud/gcloud-cli-ubuntu-20/src/keys/learn-gcp-cloud-run-328aca6c6796.json'
+bucketDataflow=bucket_dataflow #'hello-dataflow-bucket'
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = serviceAccount
 
 
@@ -14,11 +19,11 @@ def write_hello_word(argv=None):
     options = PipelineOptions(
         flags=argv,
         runner='DataflowRunner',
-        project='learn-gcp-cloud-run',
-        temp_location='gs://hello-word-bucket/tmp',
-        staging_location='gs://hello-word-bucket/stagin',
-        region='us-central1',
-        service_account='dataflow-teste@learn-gcp-cloud-run.iam.gserviceaccount.com',  # Replace with your actual service account email
+        project=project,
+        temp_location=f"""'gs://{bucketDataflow}/tmp'""",
+        staging_location=f"""'gs://{bucketDataflow}/stagin'""",
+        region=region,
+        service_account=service_account,  # Replace with your actual service account email
         )
     
     class PrintHelloWorld(beam.DoFn):

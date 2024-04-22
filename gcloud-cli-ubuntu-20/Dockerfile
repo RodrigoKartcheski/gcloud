@@ -1,6 +1,12 @@
 #! Dockerfile
 
 ## baixar o diretorio do repositorio remoto para local: git clone https://github.com/RodrigoKartcheski/gcloud.git
+# acesso ao console GCP: https://console.cloud.google.com/
+# criar projeto: <learn-dataflow-420912>
+# criar a conta de serviço: <dataflow-teste@learn-dataflow-420912.iam.gserviceaccount.com>
+# criar a chave de serviço
+# habilitar Dataflow API
+# crie o bucket <hello-dataflow-bucket>
 # em variaveis (ENV) adequar os caminho porpostos para a realidade do local
 # acesse o repositorio clonado
 # ATENÇÃO: para executar o docker build deve-se estar no mesmo diretorio do arquivo Dockerfile - neste exemplo seria o diretorio "gcloud-cli-debian-12"
@@ -14,8 +20,18 @@
 # docker run -it -v gcloud_ubuvol:/app/src -v /home/jobs/gcloud/gcloud-cli-ubuntu-20/src:/home/jobs/gcloud/gcloud-cli-ubuntu-20/src mgcloud:1.0 bash
 # abaixo comandos opcionais - usar com cuidado
 # cd /home/jobs/gcloud/gcloud-cli-ubuntu-20/src
+# gcloud init
+# gcloud projects add-iam-policy-binding learn-dataflow-420912 --member=user:rodrigo.kartcheski@gmail.com --role=roles/iam.serviceAccountUser
+# gcloud projects add-iam-policy-binding learn-dataflow-420912 --member=serviceAccount:dataflow-teste@learn-dataflow-420912.iam.gserviceaccount.com --role=roles/dataflow.admin
+# gcloud projects add-iam-policy-binding learn-dataflow-420912 --member="serviceAccount:dataflow-teste@learn-dataflow-420912.iam.gserviceaccount.com" --role=roles/iam.serviceAccountUser
+# gcloud projects add-iam-policy-binding learn-dataflow-420912 --member="serviceAccount:dataflow-teste@learn-dataflow-420912.iam.gserviceaccount.com" --role=roles/storage.objectAdmin
+# gcloud projects add-iam-policy-binding learn-dataflow-420912 --member="serviceAccount:dataflow-teste@learn-dataflow-420912.iam.gserviceaccount.com" --role=roles/storage.objectViewer
+# opcional: gcloud projects add-iam-policy-binding learn-dataflow-420912 --member=serviceAccount:dataflow-teste@learn-dataflow-420912.iam.gserviceaccount.com --role=roles/storage.admin
 
 
+
+
+# learn-dataflow-420912
 FROM ubuntu:20.04
 
 USER root

@@ -21,6 +21,7 @@
 # abaixo comandos opcionais - usar com cuidado
 # cd /home/jobs/gcloud/gcloud-cli-ubuntu-20/src
 # gcloud init
+# excute o arquivo <python3 gcp_iam_management.py> ou os arquivos abaixo
 # gcloud projects add-iam-policy-binding learn-dataflow-420912 --member=user:rodrigo.kartcheski@gmail.com --role=roles/iam.serviceAccountUser
 # gcloud projects add-iam-policy-binding learn-dataflow-420912 --member=serviceAccount:dataflow-teste@learn-dataflow-420912.iam.gserviceaccount.com --role=roles/dataflow.admin
 # gcloud projects add-iam-policy-binding learn-dataflow-420912 --member="serviceAccount:dataflow-teste@learn-dataflow-420912.iam.gserviceaccount.com" --role=roles/iam.serviceAccountUser

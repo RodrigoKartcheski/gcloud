@@ -24,7 +24,7 @@
 # cole a chave json do serviçe account no diretorio keys
 # No arquivo config.py alterar as condições do projeto
 # gcloud init
-# excute o arquivo <python3 gcp_iam_management.py> ou os arquivos abaixo
+# excute o arquivo <python3 gcp_iam_management.py> ou os comandos abaixo
 # gcloud projects add-iam-policy-binding learn-dataflow-420912 --member=user:rodrigo.kartcheski@gmail.com --role=roles/iam.serviceAccountUser
 # gcloud projects add-iam-policy-binding learn-dataflow-420912 --member=serviceAccount:dataflow-teste@learn-dataflow-420912.iam.gserviceaccount.com --role=roles/dataflow.admin
 # gcloud projects add-iam-policy-binding learn-dataflow-420912 --member="serviceAccount:dataflow-teste@learn-dataflow-420912.iam.gserviceaccount.com" --role=roles/iam.serviceAccountUser
@@ -32,6 +32,12 @@
 # gcloud projects add-iam-policy-binding learn-dataflow-420912 --member="serviceAccount:dataflow-teste@learn-dataflow-420912.iam.gserviceaccount.com" --role=roles/storage.objectViewer
 # opcional: gcloud projects add-iam-policy-binding learn-dataflow-420912 --member=serviceAccount:dataflow-teste@learn-dataflow-420912.iam.gserviceaccount.com --role=roles/storage.admin
 
+# gcloud projects add-iam-policy-binding learn-dataflow-420912 --member=serviceAccount:dataflow-teste@learn-dataflow-420912.iam.gserviceaccount.com --role=roles/dataflow.worker
+# gcloud projects add-iam-policy-binding learn-dataflow-420912 --member=serviceAccount:dataflow-teste@learn-dataflow-420912.iam.gserviceaccount.com --role=roles/storage.objectAdmin
+# gcloud projects add-iam-policy-binding learn-dataflow-420912 --member=serviceAccount:dataflow-teste@learn-dataflow-420912.iam.gserviceaccount.com --role=roles/artifactregistry.reader
+# roles/dataflow.worker
+# roles/storage.objectAdmin
+# roles/artifactregistry.reader
 
 FROM ubuntu:20.04
 

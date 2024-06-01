@@ -56,59 +56,60 @@ ENV DEBIAN_FRONTEND noninteractive
 
 WORKDIR /app
 
-# Atualizar lista de pacotes e instalar dependências
-RUN apt-get update && apt-get install -y \
-    wget \
-    build-essential \
-    libssl-dev \
-    libffi-dev \
-    zlib1g-dev \
-    libbz2-dev \
-    libreadline-dev \
-    libsqlite3-dev \
-    libncursesw5-dev \
-    libgdbm-dev \
-    libnss3-dev \
-    liblzma-dev \
-    tk-dev \
-    libxml2-dev \
-    libxmlsec1-dev \
-    xz-utils \
-    libffi-dev \
-    liblzma-dev \
-    curl \
-    git \
-    nano \
-    vim \
-    vim-tiny
+RUN apt-get update && apt-get install -y python3-pip
 
-# Baixar e instalar Python 3.10
-RUN wget https://www.python.org/ftp/python/3.10.0/Python-3.10.0.tgz \
-    && tar -xf Python-3.10.0.tgz \
-    && cd Python-3.10.0 \
-    && ./configure --enable-optimizations \
-    && make -j$(nproc) \
-    && make altinstall \
-    && cd .. \
-    && rm -rf Python-3.10.0 Python-3.10.0.tgz
-
-# Definir Python 3.10 como padrão
-RUN update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.10 1
-
-# Verificar a versão do Python
-RUN python3 --version
-
-# Instalar o pip para Python 3.10
-RUN wget https://bootstrap.pypa.io/get-pip.py \
-    && python3.10 get-pip.py \
-    && rm get-pip.py
+# Copie o conteúdo do diretório src para o diretório de trabalho no contêiner
+COPY src/ src/
 
 # Instale as dependências do Python
 COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copie o conteúdo do diretório src para o diretório de trabalho no contêiner
-COPY src/ src/
+
+####
+# Instalar as dependências necessárias
+RUN apt-get update && apt-get -y install wget build-essential libssl-dev libffi-dev zlib1g-dev
+
+# Instalar wget para baixar o Python
+RUN apt-get install -y wget
+
+# Baixar e instalar o Python
+#RUN apt update && apt install -y python3
+#RUN apt-get update && apt-get install -y python3-pip
+
+
+# Instale o pacote libbz2-dev
+#RUN apt-get update && apt-get install -y libbz2-dev
+# Correção: Copiar o arquivo _bz2.cpython-39-x86_64-linux-gnu.so para /usr/local/lib/python3.9/
+#RUN cp /usr/lib/python3.9/lib-dynload/_bz2.cpython-39-x86_64-linux-gnu.so  /usr/local/lib/python3.9/
+
+
+# Verificar a versão do Python
+RUN python3 --version
+
+
+
+
+# Baixar o script get-pip.py
+#RUN wget https://bootstrap.pypa.io/get-pip.py
+
+# Instalar o pip para Python 3.9
+#RUN python -m pip install --upgrade pip
+
+# Verificar a versão do pip
+#RUN python3.9 -m pip --version
+
+# Limpar arquivos desnecessários
+#RUN rm -rf Python-3.9.7.tgz Python-3.9.7 get-pip.py
+
+###
+COPY requirements.txt requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY src src
+
+# Atualizar a lista de pacotes e instalar ferramentas básicas
+RUN apt update -y && apt install -y curl wget gnupg
 
 # Baixar e instalar a chave GPG do Google Cloud SDK
 RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor | tee /etc/apt/trustedsources.gpg > /dev/null
@@ -123,5 +124,21 @@ RUN apt update -y && apt install -y google-cloud-sdk
 RUN echo "export GOOGLE_APPLICATION_DEFAULT_PROJECT=${PROJECT_ID}" >> ~/.bashrc \
     && echo "export CLOUD_SDK_COMPUTE_ZONE=${CLOUD_ZONE}" >> ~/.bashrc
 
-CMD ["bash"]
+    
+# Instalar o Git
+RUN apt-get update && apt-get install -y git
 
+# Clonar o repositório e configurar o sparse-checkout
+#RUN git clone --depth 1 --filter=blob:none --sparse ${PATH_REPO} \
+#    && cd dataflow_repo \
+#    && git sparse-checkout init --cone \
+#    && git sparse-checkout set ${DIR_REPO}
+
+# Instalar os editores de texto
+RUN apt-get update && apt-get install -y nano vim vim-tiny
+
+# (Opcional) Verificar a instalação
+RUN nano --version && vim --version && vi --version
+
+
+CMD ["bash"]

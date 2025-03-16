@@ -1,5 +1,9 @@
 #
 
+minha-app será chamada de lab1-app
+meu repositorio do Artifacty será chamado de cr-lab1-repo
+
+
 ✅ 1. Criar o diretorio
 	mkdir lab1
 
@@ -13,8 +17,8 @@
 	exemplo na pasta lab1
 
 ✅ 5. Testar localmente
-	docker build -t minha-app .
-	docker run -p 8080:8080 minha-app
+	docker build -t lab1-app .
+	docker run -p 8080:8080 lab1-app
 
 
 
@@ -30,42 +34,42 @@
 
 ## Criar o repositório no Artifact Registry
 
-gcloud artifacts repositories create meu-repositorio \
+gcloud artifacts repositories create cr-lab1-repo \
     --repository-format=docker \
-    --location=us-central1
+    --location=us-east1
 
 ## Autenticar no Artifact Registry
-gcloud auth configure-docker us-central1-docker.pkg.dev
+gcloud auth configure-docker us-east1-docker.pkg.dev
 
 
 ## Construir e enviar a imagem "minha-app-art" para o Artifact Registry
 
-gcloud builds submit --tag us-central1-docker.pkg.dev/[SEU_PROJETO]/meu-repositorio/minha-app-art
+gcloud builds submit --tag us-east1-docker.pkg.dev/[SEU_PROJETO]/cr-lab1-repo/lab1-app
 
 Explicação:
 
 	us-central1-docker.pkg.dev → Serviço e região
 	[SEU_PROJETO] → Substitua pelo nome do seu projeto no Google Cloud
-	meu-repositorio → Nome do repositório
-	minha-app-art → Nome da imagem
+	cr-lab1-repo → Nome do repositório
+	lab1-app → Nome da imagem
 	
 ## Verificar se a imagem foi enviada com sucesso
 
-gcloud artifacts docker images list us-central1-docker.pkg.dev/[SEU_PROJETO]/meu-repositorio
+gcloud artifacts docker images list us-east1-docker.pkg.dev/dataplex-experience-6133/cr-lab1-repo
 
 
 ✅ 8. Passos para implantação no Cloud Run:
 
 ## Verifique se a imagem foi corretamente enviada para o Artifact Registry:
 
-gcloud artifacts docker images list us-east1-docker.pkg.dev/dataplex-experience-6133/meu-rep-hello
+gcloud artifacts docker images list us-east1-docker.pkg.dev/[SEU_PROJETO]/meu-rep-hello
 
 
 ## Implantar a imagem no Cloud Run:
 gcloud run deploy minha-app \
-    --image us-east1-docker.pkg.dev/dataplex-experience-6133/meu-rep-hello/minha-app-art \
+    --image us-east1-docker.pkg.dev/dataplex-experience-6133/cr-lab1-repo/lab1-app \
     --platform managed \
-    --region us-central1 \
+    --region us-east1 \
     --allow-unauthenticated
 
 Detalhes:

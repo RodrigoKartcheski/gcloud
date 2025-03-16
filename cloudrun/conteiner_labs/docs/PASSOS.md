@@ -1,17 +1,16 @@
 #
 
 ✅ 1. Criar o diretorio
-
+	mkdir lab1
 
 ✅ 2. Criar o Dockerfile
-
+	exemplo na pasta lab1
 
 
 ✅ 3. Criar o requeriments.txt
-
-
+	exemplo na pasta lab1
 ✅ 4. Criar o arquivo main.py
-
+	exemplo na pasta lab1
 
 ✅ 5. Testar localmente
 	docker build -t minha-app .

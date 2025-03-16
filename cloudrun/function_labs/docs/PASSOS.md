@@ -1,7 +1,7 @@
 #
 
-minha-app 
-meu repositorio do Artifacty
+minha-app vai se chamar fct-lab1-app
+meu repositorio do Artifacty fct-lab1-repo
 
 
 ✅ 1. Criar o diretorio
@@ -17,8 +17,8 @@ meu repositorio do Artifacty
 	exemplo na pasta lab1
 
 ✅ 5. Testar localmente
-	docker build -t lab1-app .
-	docker run -p 8080:8080 lab1-app
+	docker build -t fct-lab1-app .
+	docker run -p 8080:8080 fct-lab1-app
 
 
 --------------------------------------------
@@ -34,52 +34,52 @@ meu repositorio do Artifacty
 
 ## Criar o repositório no Artifact Registry
 
-gcloud artifacts repositories create cr-lab1-repo \
+gcloud artifacts repositories create fct-lab1-repo \
     --repository-format=docker \
-    --location=us-east1
+    --location=us-east1 \
+    --description="DESCRIPTION"
+    
+ 
+## Verificar se o repositorio foi criado
+ 
+gcloud artifacts repositories list
+    
 
-## Autenticar no Artifact Registry
-gcloud auth configure-docker us-east1-docker.pkg.dev
+## Criar uma função remotamente
 
-
-## Construir e enviar a imagem "minha-app-art" para o Artifact Registry
-
-gcloud builds submit --tag us-east1-docker.pkg.dev/[SEU_PROJETO]/cr-lab1-repo/lab1-app
-
-Explicação:
-
-	us-central1-docker.pkg.dev → Serviço e região
-	[SEU_PROJETO] → Substitua pelo nome do seu projeto no Google Cloud
-	cr-lab1-repo → Nome do repositório
-	lab1-app → Nome da imagem
-	
-## Verificar se a imagem foi enviada com sucesso
-
-gcloud artifacts docker images list us-east1-docker.pkg.dev/dataplex-experience-6133/cr-lab1-repo
+gcloud builds submit --pack image=us-east1-docker.pkg.dev/dataplex-experience-6133/fct-lab1-repo
 
 
-✅ 8. Passos para implantação no Cloud Run:
-
-## Verifique se a imagem foi corretamente enviada para o Artifact Registry:
-
-gcloud artifacts docker images list us-east1-docker.pkg.dev/[SEU_PROJETO]/meu-rep-hello
+## Criar um arquivo yaml
 
 
-## Implantar a imagem no Cloud Run:
-gcloud run deploy minha-app \
-    --image us-east1-docker.pkg.dev/dataplex-experience-6133/cr-lab1-repo/lab1-app \
-    --platform managed \
-    --region us-east1 \
-    --allow-unauthenticated
 
-Detalhes:
+## Crie o aplicativo
 
-	--image us-east1-docker.pkg.dev/dataplex-experience-6133/meu-rep-hello/minha-app-art: Aqui você está especificando a URL da imagem no Artifact Registry.
-	--platform managed: Usando a plataforma Cloud Run gerenciada.
-	--region us-central1: Região onde você deseja implantar a aplicação (substitua se necessário).
-	--allow-unauthenticated: Permite acesso público à aplicação.
+gcloud builds submit .
+
+## Use gcloud para enviar o código-fonte do aplicativo para o Cloud Build
+gcloud builds submit --pack image=us-east1-docker.pkg.dev/dataplex-experience-6133/fct-lab1-repo/fct-lab1-app
 
 
-✅ 9. Verifique o status da implantação
+## Verifique se a função de amostra foi publicada em REPO_NAME
 
-Verifique o status da implantação: Após executar o comando, você verá a URL pública para acessar o serviço no Cloud Run. Verifique a resposta do comando para garantir que a implantação foi bem-sucedida.
+gcloud artifacts docker images list us-east1-docker.pkg.dev/dataplex-experience-6133/fct-lab1-repo
+
+
+gcloud functions deploy myfunction-lab1 \
+   --entry-point myFunctionHandler \
+   --gen2 \
+   --runtime python310 \
+   --trigger-http \
+   --allow-unauthenticated \
+   --docker-repository projects/dataplex-experience-6133/locations/us-east1/repositories/fct-lab1-repo \
+   --region us-east1
+
+
+
+## fonte
+
+https://cloud.google.com/run/docs/building/functions?hl=pt-br#python
+https://cloud.google.com/sdk/gcloud/reference/functions/deploy
+

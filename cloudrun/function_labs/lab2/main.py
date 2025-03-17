@@ -1,12 +1,11 @@
-from flask import Flask, request, jsonify
 import functions_framework
 from gcs2bq import GcsToDataFrame, BigQueryLoader
 
-app = Flask(__name__)
+# Triggered by a change in a storage bucket
+@functions_framework.cloud_event
+def hello_gcs(cloud_event):
 
-@app.route("/", methods=["GET"])
-def hello():
-   # Parâmetros necessários
+    # Parâmetros necessários
     project_id = "dataplex-experience-6133"
     bucket_name = "bucket_new2025"
     folder_name = "pastateste"
@@ -31,7 +30,4 @@ def hello():
     bq_loader.upsert_to_bigquery(df)
 
     return "Data loaded to BigQuery successfully", 200
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)
 

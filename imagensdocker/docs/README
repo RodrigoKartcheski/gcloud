@@ -4,4 +4,16 @@ Os diretorios de imagens que iniciam com a palavra base são imagens testadas e 
 Quando eles iniciam como lab são laboratorio de imagens
 
 
-Os arquivos main.tf, terraform.tfstate e terraform.tfstate.backup estão disponiveis apenas para criar o Dockeer pelo Terraform 
+Os arquivos main.tf, terraform.tfstate e terraform.tfstate.backup estão disponiveis apenas para criar o Dockeer pelo Terraform
+
+
+O arquivo main.tf fica no mesmo diretorio do Docker da imagem para iniciar a imagem pelo Terraform 
+Entrar no diretorio do Dockerfile e inicia-lo pelo terraform
+
+O Dockerfile de base-ubuntu-20 diretorio exige uma pasta src
+
+# base-ubuntu-20
+Depois que rodar o terraform init posso usar o comando docker exec -it ctnr_ubuntu_20_gcloud /bin/bash
+
+terraform destroy -auto-approve
+

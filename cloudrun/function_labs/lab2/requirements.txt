@@ -1,0 +1,11 @@
+functions-framework==3.*
+--extra-index-url https://test.pypi.org/simple
+gcs2bq==0.0.37
+google-cloud-storage==2.19.0
+google-cloud-bigquery==3.29.0
+db-dtypes==1.4.0
+pandas==2.2.3
+pyarrow  # Recomendado para desempenho
+xlsxwriter==3.0.3
+openpyxl==3.1.5
+

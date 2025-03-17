@@ -1,0 +1,21 @@
+# cloudbuild.yaml
+options:
+  logging: CLOUD_LOGGING_ONLY
+  pool: {}
+
+steps:
+- name: gcr.io/k8s-skaffold/pack
+  entrypoint: pack
+  args:
+  - build
+  - us-east1-docker.pkg.dev/dataplex-experience-6133/fct-lab1-repo/fct-lab1-repo
+  - --builder
+  - gcr.io/buildpacks/builder:latest
+  - --network
+  - cloudbuild
+  env:
+  - "PORT=8080"
+
+images:
+- us-east1-docker.pkg.dev/dataplex-experience-6133/fct-lab1-repo/fct-lab1-repo
+

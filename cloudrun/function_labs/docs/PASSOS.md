@@ -57,7 +57,7 @@ gcloud artifacts docker images list us-east1-docker.pkg.dev/dataplex-experience-
 
 
 gcloud functions deploy myfunction-lab1 \
-   --entry-point myFunctionHandler \
+   --entry-point hello \
    --gen2 \
    --runtime python310 \
    --trigger-http \

@@ -7,7 +7,7 @@ meu repositorio do Artifacty fct-lab1-repo
 ✅ 1. Criar o diretorio
 	mkdir lab1
 
-✅ 2. Criar o Dockerfile
+✅ 2. Criar o cloudbuild,yaml
 	exemplo na pasta lab1
 
 
@@ -21,16 +21,12 @@ meu repositorio do Artifacty fct-lab1-repo
 	docker run -p 8080:8080 fct-lab1-app
 
 
---------------------------------------------
-
 ✅ 6. Autenticar no Gcloud
 
 	gcloud auth login
 	
 	gcloud config set project [SEU_PROJETO]
 
-
-✅ 7. Atualizar o Flask e o Werkzeug
 
 ## Criar o repositório no Artifact Registry
 
@@ -45,22 +41,15 @@ gcloud artifacts repositories create fct-lab1-repo \
 gcloud artifacts repositories list
     
 
-## Criar uma função remotamente
+## Criar uma função remotamente usando gcloud para enviar o código-fonte do aplicativo para o Cloud Build
 
 gcloud builds submit --pack image=us-east1-docker.pkg.dev/dataplex-experience-6133/fct-lab1-repo
-
-
-## Criar um arquivo yaml
-
-
-
-## Crie o aplicativo
-
-gcloud builds submit .
-
-## Use gcloud para enviar o código-fonte do aplicativo para o Cloud Build
 gcloud builds submit --pack image=us-east1-docker.pkg.dev/dataplex-experience-6133/fct-lab1-repo/fct-lab1-app
 
+
+## Crie o aplicativo com Dockerfile
+
+gcloud builds submit .
 
 ## Verifique se a função de amostra foi publicada em REPO_NAME
 

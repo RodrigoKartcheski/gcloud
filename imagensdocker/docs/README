@@ -1,4 +1,7 @@
 # definicao de imagens
 Os diretorios de imagens que iniciam com a palavra base são imagens testadas e prontas para uso.
 
-Quando eles iniciam omo lab são laboratorio de imagens
+Quando eles iniciam como lab são laboratorio de imagens
+
+
+Os arquivos main.tf, terraform.tfstate e terraform.tfstate.backup estão disponiveis apenas para criar o Dockeer pelo Terraform 

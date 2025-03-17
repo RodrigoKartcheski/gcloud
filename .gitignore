@@ -1,1 +1,8 @@
 teste*
+.terraform/            # Diretório de configuração do Terraform
+*.tfstate              # Arquivo de estado do Terraform
+*.tfstate.backup       # Backup do estado do Terraform
+.terraform.lock.hcl    # Arquivo de lock para providers
+# Ignorar arquivos de estado do Terraform
+base-ubuntu-cli-gcloud-20/terraform.tfstate
+base-ubuntu-cli-gcloud-20/terraform.tfstate.backup

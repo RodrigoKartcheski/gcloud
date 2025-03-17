@@ -1,6 +1,8 @@
 # definicao de imagens
 Os diretorios de imagens que iniciam com a palavra base são imagens testadas e prontas para uso.
 
+Recomendo fazer o git clone de gcloud copiar o diretorio base-ubuntu e salvar e diretorio separado, então podemos até excluir o gcloud no nosso notebook e clonar novamente no conteiner. E então usar o terraform de forma separada. Isso garante mais organização e gerenciamemto.
+
 Quando eles iniciam como lab são laboratorio de imagens
 
 

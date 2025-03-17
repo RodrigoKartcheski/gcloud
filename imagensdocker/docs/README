@@ -3,6 +3,9 @@ Os diretorios de imagens que iniciam com a palavra base são imagens testadas e 
 
 Recomendo fazer o git clone de gcloud copiar o diretorio base-ubuntu e salvar e diretorio separado, então podemos até excluir o gcloud no nosso notebook e clonar novamente no conteiner. E então usar o terraform de forma separada. Isso garante mais organização e gerenciamemto.
 
+sudo cp -r base-ubuntu-20-cli-gcloud /home/jobs/ && sudo chmod -R 777 /home/jobs/base-ubuntu-20-cli-gcloud
+
+
 Quando eles iniciam como lab são laboratorio de imagens
 
 

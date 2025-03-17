@@ -18,7 +18,40 @@ Entrar no diretorio do Dockerfile e inicia-lo pelo terraform
 O Dockerfile de base-ubuntu-20 diretorio exige uma pasta src
 
 # base-ubuntu-20
-Depois que rodar o terraform init posso usar o comando docker exec -it ctnr_ubuntu_20_gcloud /bin/bash
+Depois que rodar o terraform init posso usar o comando 
+
+$ docker exec -it ctnr_ubuntu_20_gcloud /bin/bash
 
 terraform destroy -auto-approve
+
+Passo a passo:
+
+✅ fazer o git clone no meu notebook
+	
+https://github.com/RodrigoKartcheski/gcloud.git
+
+✅ copiar o diretorio base para fora do repositorio
+
+sudo cp -r base-ubuntu-20-cli-gcloud /home/jobs/ && sudo chmod -R 777 /home/jobs/base-ubuntu-20-cli-gcloud
+
+✅ Iniciar o Dockerfile com terraform
+
+terraform init
+terraform plan
+terraform apply
+
+terraform destroy -auto-approve
+
+✅ Entrar do Docker
+
+$ docker exec -it ctnr_ubuntu_20_gcloud /bin/bash
+
+✅ Fazer o git clone
+
+Fazer o git clone dos repositorio que vai trabalhar
+
+
+✅ Iniciaro SDK do Gcloud 
+
+gcloud init
 

@@ -30,4 +30,7 @@ def hello_gcs(cloud_event):
     bq_loader.upsert_to_bigquery(df)
 
     return "Data loaded to BigQuery successfully", 200
+    
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080)
 
